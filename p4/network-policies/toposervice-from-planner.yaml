@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: toposervice-from-planner
+spec:
+  podSelector:
+    matchLabels:
+      app: toposervice
+  ingress:
+    - from:
+      - podSelector:
+          matchLabels:
+            app: planner
+      ports:
+        - port: 8181
+          protocol: TCP

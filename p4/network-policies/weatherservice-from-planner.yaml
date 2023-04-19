@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: weatherservice-from-planner
+spec:
+  podSelector:
+    matchLabels:
+      app: weatherservice
+  ingress:
+    - from:
+      - podSelector:
+          matchLabels:
+            app: planner
+      ports:
+        - port: 9090
+          protocol: TCP
